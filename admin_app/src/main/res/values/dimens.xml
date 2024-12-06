@@ -14,8 +14,10 @@
     <dimen name="size_x11">100dp</dimen>
     <dimen name="size_x14">200dp</dimen>
 
-    <dimen name="text_size_x1">14dp</dimen>
-    <dimen name="text_size_x3">16dp</dimen>
-    <dimen name="text_size_x4">18dp</dimen>
-    <dimen name="text_size_x5">20dp</dimen>
+    <dimen name="text_size_x1">14sp</dimen>
+    <dimen name="text_size_x3">16sp</dimen>
+    <dimen name="text_size_x4">18sp</dimen>
+    <dimen name="text_size_x5">20sp</dimen>
+    <dimen name="text_size_x6">30sp</dimen>
+    <dimen name="text_size_x7">40sp</dimen>
 </resources>
