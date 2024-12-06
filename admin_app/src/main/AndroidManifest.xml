@@ -12,7 +12,7 @@
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".SigninActivity"
             android:exported="false" />
         <activity
             android:name=".WelcomeActivity"

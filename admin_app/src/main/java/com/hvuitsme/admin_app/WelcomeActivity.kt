@@ -34,7 +34,7 @@ class WelcomeActivity : AppCompatActivity() {
         val signInBtn = findViewById<Button>(R.id.Signin)
 
         signInBtn.setOnClickListener {
-            startActivity(Intent(this, LoginActivity::class.java))
+            startActivity(Intent(this, SigninActivity::class.java))
             finish()
         }
     }
