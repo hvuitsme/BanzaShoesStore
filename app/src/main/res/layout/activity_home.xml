@@ -90,6 +90,7 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:scrollbars="none"
         android:layout_marginTop="@dimen/size_x4"
         android:layout_marginStart="@dimen/size_x4"
         android:layout_marginEnd="@dimen/size_x4"
@@ -102,6 +103,18 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/iv_louisvuitton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_btn"
+                android:contentDescription="louisvuitton logo"
+                android:padding="10dp"
+                android:src="@drawable/louis_vuitton_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
                 android:id="@+id/iv_nike"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,9 +122,10 @@
                 android:contentDescription="nike logo"
                 android:padding="10dp"
                 android:src="@drawable/nike_logo"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginStart="@dimen/size_x4"
+                app:layout_constraintStart_toEndOf="@id/iv_louisvuitton"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
 
             <ImageView
                 android:id="@+id/iv_adidas"
@@ -143,14 +157,15 @@
                 android:id="@+id/iv_converse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/size_x4"
+                android:background="@drawable/bg_btn"
                 android:contentDescription="converse logo"
                 android:padding="10dp"
-                android:background="@drawable/bg_btn"
-                android:layout_marginStart="@dimen/size_x4"
-                app:layout_constraintStart_toEndOf="@id/iv_balenciaga"
                 android:src="@drawable/converse_logo"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iv_balenciaga"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintVertical_bias="0.0" />
 
             <ImageView
                 android:id="@+id/iv_puma"
@@ -162,6 +177,32 @@
                 android:layout_marginStart="@dimen/size_x4"
                 app:layout_constraintStart_toEndOf="@id/iv_converse"
                 android:src="@drawable/puma_logo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_vans"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="vans logo"
+                android:padding="10dp"
+                android:background="@drawable/bg_btn"
+                android:layout_marginStart="@dimen/size_x4"
+                android:src="@drawable/vans_logo"
+                app:layout_constraintStart_toEndOf="@id/iv_puma"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <ImageView
+                android:id="@+id/iv_golden_goose"
+                android:layout_width="wrap_content"
+                android:layout_height="60dp"
+                android:contentDescription="golden_goose logo"
+                android:padding="10dp"
+                android:background="@drawable/bg_btn"
+                android:layout_marginStart="@dimen/size_x4"
+                android:src="@drawable/golden_goose_logo"
+                app:layout_constraintStart_toEndOf="@id/iv_vans"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
 

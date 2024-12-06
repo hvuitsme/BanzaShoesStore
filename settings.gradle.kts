@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "shopshoes"
 include(":app")
+include(":admin_app")
