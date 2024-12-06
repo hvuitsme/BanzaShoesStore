@@ -1,15 +1,13 @@
 <resources>
     <string name="app_name">admin_app</string>
-    <resources>
-        <string name="app_name">shopshoes</string>
-        <string name="welcome">Welcome to Shop Shoes</string>
-        <string name="sign_in">Sign In</string>
-        <string name="sign_up">Sign Up</string>
-        <string name="skip"><![CDATA[>skip]]></string>
-        <string name="username_or_email">Username or Email</string>
-        <string name="pswrd">Password</string>
-        <string name="default_web_client_id">YOUR_WEB_CLIENT_ID</string>
-        <string name="search_itms">Search your items?</string>
-        <string name="brand">Banza Shoes</string>
-        <string name="hello">HELLO</string>
-    </resources>
+    <string name="welcome">Welcome to Shop Shoes</string>
+    <string name="sign_in">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="skip"><![CDATA[>skip]]></string>
+    <string name="username_or_email">Username or Email</string>
+    <string name="pswrd">Password</string>
+    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID</string>
+    <string name="search_itms">Search your items?</string>
+    <string name="brand">Banza Shoes</string>
+    <string name="hello">HELLO</string>
+</resources>
