@@ -36,7 +36,8 @@ class WelcomeActivity : AppCompatActivity() {
         val signInBtn = findViewById<Button>(R.id.Signin)
         val signUpBtn = findViewById<Button>(R.id.Signup)
 
-        Glide.with(this).load(R.drawable.bg_signin).apply(RequestOptions.bitmapTransform(BlurTransformation(25,27))).into(blurImage!!)
+        Glide.with(this).load(R.drawable.bg_signin).apply(RequestOptions
+            .bitmapTransform(BlurTransformation(25,27))).into(blurImage!!)
 
         val rotateAnimator = ObjectAnimator.ofFloat(blurImage, "rotation", 0f, 360f)
         rotateAnimator.duration = 10000

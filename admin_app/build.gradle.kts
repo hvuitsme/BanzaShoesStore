@@ -45,4 +45,8 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("com.github.bumptech.glide:glide:5.0.0-rc01")
+    implementation("jp.wasabeef:glide-transformations:4.3.0")
+    implementation("com.airbnb.android:lottie:6.6.0")
 }
