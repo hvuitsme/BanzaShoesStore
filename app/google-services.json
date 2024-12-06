@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "897522177662",
+    "project_id": "shopshoes01",
+    "storage_bucket": "shopshoes01.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897522177662:android:13f39617856934f4566a2f",
+        "android_client_info": {
+          "package_name": "com.hvuitsme.shopshoes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897522177662-80h77af2ndgtod9lgnvepgoeftp0bf1d.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hvuitsme.shopshoes",
+            "certificate_hash": "5f24f2f3b7129920565b3e1e2ae0022c71322691"
+          }
+        },
+        {
+          "client_id": "897522177662-i4cp1ags8e67d6s2l1val01i9592nk8t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5CMbQpY8WVZTSxjHy9V5rI6kHubEOA0o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897522177662-i4cp1ags8e67d6s2l1val01i9592nk8t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
