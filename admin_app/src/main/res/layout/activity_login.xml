@@ -55,29 +55,18 @@
         android:background="@drawable/bg_edtext"
         app:layout_constraintTop_toBottomOf="@id/username"/>
 
-    <TextView
-        android:id="@+id/or"
-        style="@style/WelcomeText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/size_x6"
-        android:text="Or"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password" />
-
     <Button
         android:id="@+id/Signin"
         style="@style/BtnStyle"
         android:layout_width="wrap_content"
         android:layout_height="37dp"
-        android:layout_marginTop="@dimen/size_x10"
+        android:layout_marginTop="@dimen/size_x6"
         android:background="@drawable/bg_btn"
         android:text="@string/sign_in"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/or" />
+        app:layout_constraintTop_toBottomOf="@id/password" />
 
     <View
         android:id="@+id/dark_overlay"
