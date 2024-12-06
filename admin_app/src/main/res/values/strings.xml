@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">admin_app</string>
-    <string name="welcome">Welcome to Shop Shoes</string>
+    <string name="welcome">Welcome, my Admin</string>
     <string name="sign_in">Sign In</string>
     <string name="sign_up">Sign Up</string>
     <string name="skip"><![CDATA[>skip]]></string>

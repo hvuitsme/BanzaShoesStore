@@ -9,6 +9,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Shopshoes">
         <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginActivity"
+            android:exported="false" />
+        <activity
             android:name=".WelcomeActivity"
             android:exported="true">
             <intent-filter>

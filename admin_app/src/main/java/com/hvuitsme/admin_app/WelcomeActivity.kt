@@ -32,7 +32,10 @@ class WelcomeActivity : AppCompatActivity() {
         rotateAnimator.start()
 
         val signInBtn = findViewById<Button>(R.id.Signin)
-        val signUpBtn = findViewById<Button>(R.id.Signup)
 
+        signInBtn.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
     }
 }
