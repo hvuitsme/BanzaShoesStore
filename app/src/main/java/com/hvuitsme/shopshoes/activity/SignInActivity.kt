@@ -1,4 +1,4 @@
-package com.hvuitsme.shopshoes
+package com.hvuitsme.shopshoes.activity
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
@@ -20,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
+import com.hvuitsme.shopshoes.R
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 class SignInActivity : AppCompatActivity() {

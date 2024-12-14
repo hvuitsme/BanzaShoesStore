@@ -1,4 +1,4 @@
-package com.hvuitsme.shopshoes
+package com.hvuitsme.shopshoes.activity
 
 import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.auth.FirebaseAuth
+import com.hvuitsme.shopshoes.R
 import jp.wasabeef.glide.transformations.BlurTransformation
 
 class WelcomeActivity : AppCompatActivity() {
