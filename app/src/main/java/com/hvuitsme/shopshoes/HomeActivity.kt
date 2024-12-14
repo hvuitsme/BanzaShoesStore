@@ -1,6 +1,7 @@
 package com.hvuitsme.shopshoes
 
 import android.content.Intent
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,11 +9,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.viewpager2.widget.ViewPager2
+import com.airbnb.lottie.model.content.GradientColor
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -25,6 +29,8 @@ import kotlinx.coroutines.Runnable
 class HomeActivity : AppCompatActivity() {
     private lateinit var mGoogleSignInClient: GoogleSignInClient
     private lateinit var mAuth: FirebaseAuth
+    private lateinit var brandImageViews : List<ImageView>
+    private var selectedImageView : ImageView ?= null
 
     private lateinit var viewPager: ViewPager2
     private val handler = Handler(Looper.getMainLooper())
@@ -49,6 +55,35 @@ class HomeActivity : AppCompatActivity() {
         viewPager.setCurrentItem(startPosition, true)
 
         startAutoScroll()
+
+        brandImageViews = listOf(
+            findViewById(R.id.iv_louisvuitton),
+            findViewById(R.id.iv_nike),
+            findViewById(R.id.iv_adidas),
+            findViewById(R.id.iv_balenciaga),
+            findViewById(R.id.iv_converse),
+            findViewById(R.id.iv_puma),
+            findViewById(R.id.iv_vans),
+            findViewById(R.id.iv_golden_goose)
+        )
+
+        val defaultBrandIv = findViewById<ImageView>(R.id.iv_louisvuitton)
+        setSolidColor(defaultBrandIv, R.color.grey)
+        selectedImageView = defaultBrandIv
+
+        // gán sự kiện click cho mỗi imageview
+        brandImageViews.forEach { imageView ->
+            imageView.setOnClickListener {
+                //Đặt nền của từng iv về trạng thái ban đầu(mặc định)
+                selectedImageView?.let { resetBgColor(it) }
+
+                //Đặt nền của iv sau khi được chọn
+                setSolidColor(imageView, R.color.grey)
+
+                //Cập nhật trạng thái
+                selectedImageView = imageView
+            }
+        }
 
 //        mAuth = FirebaseAuth.getInstance()
 //
@@ -83,6 +118,29 @@ class HomeActivity : AppCompatActivity() {
 //        }
     }
 
+
+
+    //    private fun signOutAndStartSignInActivity() {
+//        mAuth.signOut()
+//
+//        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+//            // Optional: Update UI or show a message to the user
+//            val intent = Intent(this@HomeActivity, WelcomeActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+//    }
+
+    private fun setSolidColor(imageView: ImageView, colorResId: Int) {
+        val drawable = imageView.background as GradientDrawable
+        drawable.setColor(ContextCompat.getColor(this, colorResId)) //đặt lại màu nền
+    }
+
+    private fun resetBgColor(imageView: ImageView) {
+        val drawable = imageView.background as GradientDrawable
+        drawable.setColor(ContextCompat.getColor(this, R.color.transparent))
+    }
+
     private fun startAutoScroll() {
         val delay: Long = 6000
         handler.postDelayed(object : Runnable{
@@ -102,15 +160,4 @@ class HomeActivity : AppCompatActivity() {
         super.onDestroy()
         stopAutoScroll()
     }
-
-//    private fun signOutAndStartSignInActivity() {
-//        mAuth.signOut()
-//
-//        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
-//            // Optional: Update UI or show a message to the user
-//            val intent = Intent(this@HomeActivity, WelcomeActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
-//    }
 }

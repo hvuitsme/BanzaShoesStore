@@ -55,5 +55,6 @@ dependencies {
     implementation ("com.google.firebase:firebase-auth:23.1.0")
     implementation ("com.google.android.gms:play-services-auth:20.7.0")
     implementation("com.airbnb.android:lottie:6.6.0")
+    implementation("io.appwrite:sdk-for-android:6.0.0")
 
 }
