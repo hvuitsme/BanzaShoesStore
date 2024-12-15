@@ -34,6 +34,9 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    buildFeatures{
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -56,5 +59,6 @@ dependencies {
     implementation ("com.google.android.gms:play-services-auth:20.7.0")
     implementation("com.airbnb.android:lottie:6.6.0")
     implementation("io.appwrite:sdk-for-android:6.0.0")
-
+    implementation("com.google.code.gson:gson:2.11.0")
+    implementation("com.tbuonomo:dotsindicator:5.1.0")
 }

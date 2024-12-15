@@ -1,48 +1,66 @@
 package com.hvuitsme.shopshoes.activity
 
+import android.graphics.Outline
 import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.view.View
+import android.view.ViewOutlineProvider
 import android.widget.ImageView
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager2.widget.CompositePageTransformer
+import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.hvuitsme.shopshoes.R
 import com.hvuitsme.shopshoes.adapter.ImagePagerAdapter
+import com.hvuitsme.shopshoes.adapter.SlideAdapter
+import com.hvuitsme.shopshoes.databinding.ActivityHomeBinding
+import com.hvuitsme.shopshoes.model.SlideModel
+import com.hvuitsme.shopshoes.viewmodel.MainViewModel
 import kotlinx.coroutines.Runnable
 
 class HomeActivity : AppCompatActivity() {
-    private lateinit var mGoogleSignInClient: GoogleSignInClient
-    private lateinit var mAuth: FirebaseAuth
+//    private lateinit var mGoogleSignInClient: GoogleSignInClient
+//    private lateinit var mAuth: FirebaseAuth
     private lateinit var brandImageViews : List<ImageView>
     private var selectedImageView : ImageView ?= null
 
-    private lateinit var viewPager: ViewPager2
-    private val handler = Handler(Looper.getMainLooper())
-    private var currentPage = 0
+    private lateinit var binding: ActivityHomeBinding
+    private val viewModel = MainViewModel()
+
+//    private lateinit var viewPager: ViewPager2
+//    private val handler = Handler(Looper.getMainLooper())
+//    private var currentPage = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_home)
+//        setContentView(R.layout.activity_home)
 
-        viewPager = findViewById(R.id.pagerView)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        val imageList = listOf(
-            R.drawable.ad_image_1,
-            R.drawable.ad_image_2,
-            R.drawable.ad_image_3
-        )
-
-        val adapter = ImagePagerAdapter(imageList)
-        viewPager.adapter = adapter
-
-        val startPosition = Int.MAX_VALUE / 2 - (Int.MAX_VALUE / 2 % imageList.size)
-        viewPager.setCurrentItem(startPosition, true)
-
-        startAutoScroll()
+//        viewPager = findViewById(R.id.pagerView)
+//
+//        val imageList = listOf(
+//            R.drawable.ad_image_1,
+//            R.drawable.ad_image_2,
+//            R.drawable.ad_image_3
+//        )
+//
+//        val adapter = ImagePagerAdapter(imageList)
+//        viewPager.adapter = adapter
+//
+//        val startPosition = Int.MAX_VALUE / 2 - (Int.MAX_VALUE / 2 % imageList.size)
+//        viewPager.setCurrentItem(startPosition, true)
+//
+//        startAutoScroll()
 
         brandImageViews = listOf(
             findViewById(R.id.iv_louisvuitton),
@@ -72,6 +90,8 @@ class HomeActivity : AppCompatActivity() {
                 selectedImageView = imageView
             }
         }
+
+        initBanner()
 
 //        mAuth = FirebaseAuth.getInstance()
 //
@@ -119,6 +139,42 @@ class HomeActivity : AppCompatActivity() {
 //        }
 //    }
 
+    private fun banners(image: List<SlideModel>){
+        binding.pagerView.adapter = SlideAdapter(image, binding.pagerView)
+        binding.pagerView.clipToPadding = false
+        binding.pagerView.clipChildren = false
+        binding.pagerView.offscreenPageLimit = 3
+        binding.pagerView.getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
+
+        binding.pagerView.outlineProvider = object : ViewOutlineProvider(){
+            override fun getOutline(view: View, outline: Outline) {
+                val cornerRadius = resources.getDimension(R.dimen.size_x5)
+                outline.setRoundRect(0, 0, view.width, view.height, cornerRadius)
+            }
+        }
+        binding.pagerView.clipToOutline = true
+
+        val compositePageTransformer = CompositePageTransformer().apply {
+            addTransformer(MarginPageTransformer(40)) // căn lề khoảng cách 40dp
+        }
+
+        binding.pagerView.setPageTransformer(compositePageTransformer)
+
+//        if (image.size > 1){ // đặt điều kiện nếu image ở trang nào thì theo trang ấy, và chấm dưới trang di chuyển theo(hiện tại bỏ qua vì ko có nó)
+//            binding.dotIndicator.visibility = View.VISIBLE
+//            binding.dotIndicator.attachTo(binding.pagerView)
+//        }
+    }
+
+    private fun initBanner(){
+        binding.progressBar.visibility = View.VISIBLE
+        viewModel.banners.observe(this, Observer {
+            banners(it)
+            binding.progressBar.visibility = View.GONE
+        })
+        viewModel.loadBanners()
+    }
+
     private fun setSolidColor(imageView: ImageView, colorResId: Int) {
         val drawable = imageView.background as GradientDrawable
         drawable.setColor(ContextCompat.getColor(this, colorResId)) //đặt lại màu nền
@@ -129,23 +185,23 @@ class HomeActivity : AppCompatActivity() {
         drawable.setColor(ContextCompat.getColor(this, R.color.transparent))
     }
 
-    private fun startAutoScroll() {
-        val delay: Long = 6000
-        handler.postDelayed(object : Runnable{
-            override fun run(){
-                currentPage = viewPager.currentItem + 1
-                viewPager.setCurrentItem(currentPage, true)
-                handler.postDelayed(this, delay)
-            }
-        },delay)
-    }
-
-    private fun stopAutoScroll(){
-        handler.removeCallbacksAndMessages(null)
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        stopAutoScroll()
-    }
+//    private fun startAutoScroll() {
+//        val delay: Long = 6000
+//        handler.postDelayed(object : Runnable{
+//            override fun run(){
+//                currentPage = viewPager.currentItem + 1
+//                viewPager.setCurrentItem(currentPage, true)
+//                handler.postDelayed(this, delay)
+//            }
+//        },delay)
+//    }
+//
+//    private fun stopAutoScroll(){
+//        handler.removeCallbacksAndMessages(null)
+//    }
+//
+//    override fun onDestroy() {
+//        super.onDestroy()
+//        stopAutoScroll()
+//    }
 }

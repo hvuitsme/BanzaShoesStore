@@ -15,8 +15,8 @@
 
         <ImageView
             android:id="@+id/iv_carousel"
-            android:layout_width="400dp"
-            android:layout_height="200dp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_x14"
             android:contentDescription="TODO"
             android:scaleType="centerCrop" />
 

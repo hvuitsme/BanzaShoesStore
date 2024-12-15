@@ -20,6 +20,8 @@
 <!--        app:layout_constraintTop_toTopOf="parent"/>-->
 
 
+
+
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -78,14 +80,34 @@
         app:layout_constraintBottom_toBottomOf="@id/edt_search"
         app:layout_constraintEnd_toEndOf="@id/edt_search"/>
 
-    <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/pagerView"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/slide"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/size_x14"
+        android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/size_x4"
         android:layout_marginStart="@dimen/size_x4"
         android:layout_marginEnd="@dimen/size_x4"
-        app:layout_constraintTop_toBottomOf="@id/edt_search"/>
+        app:layout_constraintTop_toBottomOf="@id/edt_search">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pagerView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_x14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/pagerView"
+            app:layout_constraintEnd_toEndOf="@id/pagerView"
+            app:layout_constraintTop_toTopOf="@id/pagerView"
+            app:layout_constraintBottom_toBottomOf="@id/pagerView"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -96,7 +118,7 @@
         android:layout_marginEnd="@dimen/size_x4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/pagerView">
+        app:layout_constraintTop_toBottomOf="@id/slide">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
