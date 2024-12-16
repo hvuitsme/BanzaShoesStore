@@ -12,6 +12,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -19,6 +20,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.firebase.auth.FirebaseAuth
 import com.hvuitsme.shopshoes.R
+import com.hvuitsme.shopshoes.adapter.BrandAdapter
 import com.hvuitsme.shopshoes.adapter.ImagePagerAdapter
 import com.hvuitsme.shopshoes.adapter.SlideAdapter
 import com.hvuitsme.shopshoes.databinding.ActivityHomeBinding
@@ -27,17 +29,17 @@ import com.hvuitsme.shopshoes.viewmodel.MainViewModel
 import kotlinx.coroutines.Runnable
 
 class HomeActivity : AppCompatActivity() {
-//    private lateinit var mGoogleSignInClient: GoogleSignInClient
-//    private lateinit var mAuth: FirebaseAuth
+
     private lateinit var brandImageViews : List<ImageView>
     private var selectedImageView : ImageView ?= null
-
     private lateinit var binding: ActivityHomeBinding
     private val viewModel = MainViewModel()
+    private val handler = Handler(Looper.getMainLooper())
 
-//    private lateinit var viewPager: ViewPager2
-//    private val handler = Handler(Looper.getMainLooper())
 //    private var currentPage = 0
+//    private lateinit var viewPager: ViewPager2
+//    private lateinit var mGoogleSignInClient: GoogleSignInClient
+//    private lateinit var mAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,6 +47,12 @@ class HomeActivity : AppCompatActivity() {
 
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        initBanner()
+        initBrand()
+
+        startAutoScroll()
+        stopAutoScroll()
 
 //        viewPager = findViewById(R.id.pagerView)
 //
@@ -59,39 +67,35 @@ class HomeActivity : AppCompatActivity() {
 //
 //        val startPosition = Int.MAX_VALUE / 2 - (Int.MAX_VALUE / 2 % imageList.size)
 //        viewPager.setCurrentItem(startPosition, true)
+
+//        brandImageViews = listOf(
+//            findViewById(R.id.iv_louisvuitton),
+//            findViewById(R.id.iv_nike),
+//            findViewById(R.id.iv_adidas),
+//            findViewById(R.id.iv_balenciaga),
+//            findViewById(R.id.iv_converse),
+//            findViewById(R.id.iv_puma),
+//            findViewById(R.id.iv_vans),
+//            findViewById(R.id.iv_golden_goose)
+//        )
 //
-//        startAutoScroll()
-
-        brandImageViews = listOf(
-            findViewById(R.id.iv_louisvuitton),
-            findViewById(R.id.iv_nike),
-            findViewById(R.id.iv_adidas),
-            findViewById(R.id.iv_balenciaga),
-            findViewById(R.id.iv_converse),
-            findViewById(R.id.iv_puma),
-            findViewById(R.id.iv_vans),
-            findViewById(R.id.iv_golden_goose)
-        )
-
-        val defaultBrandIv = findViewById<ImageView>(R.id.iv_louisvuitton)
-        setSolidColor(defaultBrandIv, R.color.grey)
-        selectedImageView = defaultBrandIv
-
-        // gán sự kiện click cho mỗi imageview
-        brandImageViews.forEach { imageView ->
-            imageView.setOnClickListener {
-                //Đặt nền của từng iv về trạng thái ban đầu(mặc định)
-                selectedImageView?.let { resetBgColor(it) }
-
-                //Đặt nền của iv sau khi được chọn
-                setSolidColor(imageView, R.color.grey)
-
-                //Cập nhật trạng thái
-                selectedImageView = imageView
-            }
-        }
-
-        initBanner()
+//        val defaultBrandIv = findViewById<ImageView>(R.id.iv_louisvuitton)
+//        setSolidColor(defaultBrandIv, R.color.grey)
+//        selectedImageView = defaultBrandIv
+//
+//        // gán sự kiện click cho mỗi imageview
+//        brandImageViews.forEach { imageView ->
+//            imageView.setOnClickListener {
+//                //Đặt nền của từng iv về trạng thái ban đầu(mặc định)
+//                selectedImageView?.let { resetBgColor(it) }
+//
+//                //Đặt nền của iv sau khi được chọn
+//                setSolidColor(imageView, R.color.grey)
+//
+//                //Cập nhật trạng thái
+//                selectedImageView = imageView
+//            }
+//        }
 
 //        mAuth = FirebaseAuth.getInstance()
 //
@@ -126,19 +130,17 @@ class HomeActivity : AppCompatActivity() {
 //        }
     }
 
+    private fun initBrand() {
+        binding.progressBarBrand.visibility = View.VISIBLE
+        viewModel.brands.observe(this, Observer{
+            binding.viewBrand.layoutManager = LinearLayoutManager(this@HomeActivity, LinearLayoutManager.HORIZONTAL, false)
+            binding.viewBrand.adapter = BrandAdapter(it)
+            binding.progressBarBrand.visibility = View.GONE
+        })
+        viewModel.loadBrands()
+    }
 
-
-    //    private fun signOutAndStartSignInActivity() {
-//        mAuth.signOut()
-//
-//        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
-//            // Optional: Update UI or show a message to the user
-//            val intent = Intent(this@HomeActivity, WelcomeActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
-//    }
-
+    //thiết lập slide cho banner
     private fun banners(image: List<SlideModel>){
         binding.pagerView.adapter = SlideAdapter(image, binding.pagerView)
         binding.pagerView.clipToPadding = false
@@ -160,7 +162,9 @@ class HomeActivity : AppCompatActivity() {
 
         binding.pagerView.setPageTransformer(compositePageTransformer)
 
-//        if (image.size > 1){ // đặt điều kiện nếu image ở trang nào thì theo trang ấy, và chấm dưới trang di chuyển theo(hiện tại bỏ qua vì ko có nó)
+//        if (image.size > 1){
+//          đặt điều kiện nếu image ở trang nào thì theo trang ấy,
+//          và chấm dưới trang di chuyển theo(hiện tại bỏ qua vì ko có nó)
 //            binding.dotIndicator.visibility = View.VISIBLE
 //            binding.dotIndicator.attachTo(binding.pagerView)
 //        }
@@ -175,15 +179,57 @@ class HomeActivity : AppCompatActivity() {
         viewModel.loadBanners()
     }
 
-    private fun setSolidColor(imageView: ImageView, colorResId: Int) {
-        val drawable = imageView.background as GradientDrawable
-        drawable.setColor(ContextCompat.getColor(this, colorResId)) //đặt lại màu nền
+    // Tự động cuộn và dừng cuộn
+    private fun startAutoScroll() {
+        val delay: Long = 6000
+
+        val runnable = object : Runnable{
+            override fun run() {
+                if (binding.pagerView.adapter != null){
+                    val itemCount = binding.pagerView.adapter?.itemCount ?: 0
+                    val nextPage = (binding.pagerView.currentItem + 1) % itemCount
+                    binding.pagerView.setCurrentItem(nextPage, true)
+                }
+                handler.postDelayed(this, delay)
+            }
+        }
+        handler.postDelayed(runnable, delay)
     }
 
-    private fun resetBgColor(imageView: ImageView) {
-        val drawable = imageView.background as GradientDrawable
-        drawable.setColor(ContextCompat.getColor(this, R.color.transparent))
+    private fun stopAutoScroll() {
+        handler.removeCallbacksAndMessages(null)
     }
+
+    override fun onResume() {
+        super.onResume()
+        startAutoScroll()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        stopAutoScroll()
+    }
+
+//    private fun setSolidColor(imageView: ImageView, colorResId: Int) {
+//        val drawable = imageView.background as GradientDrawable
+//        drawable.setColor(ContextCompat.getColor(this, colorResId)) //đặt lại màu nền
+//    }
+//
+//    private fun resetBgColor(imageView: ImageView) {
+//        val drawable = imageView.background as GradientDrawable
+//        drawable.setColor(ContextCompat.getColor(this, R.color.transparent))
+//    }
+
+//    private fun signOutAndStartSignInActivity() {
+//        mAuth.signOut()
+//
+//        mGoogleSignInClient.signOut().addOnCompleteListener(this) {
+//            // Optional: Update UI or show a message to the user
+//            val intent = Intent(this@HomeActivity, WelcomeActivity::class.java)
+//            startActivity(intent)
+//            finish()
+//        }
+//    }
 
 //    private fun startAutoScroll() {
 //        val delay: Long = 6000
