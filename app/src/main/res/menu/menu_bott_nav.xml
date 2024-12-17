@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/v_home"
+        android:title="Home"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/home"/>
+    <item android:id="@+id/v_favorite"
+        android:title="Favorite"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/bookmark"/>
+    <item android:id="@+id/v_user"
+        android:title="User"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/person"/>
+</menu>
