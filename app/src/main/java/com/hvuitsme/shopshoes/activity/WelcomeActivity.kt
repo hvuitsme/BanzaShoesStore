@@ -26,7 +26,7 @@ class WelcomeActivity : AppCompatActivity() {
 
         //Kiểm tra xem đã đăng nhập tài khoản gg nào chưa
         if (currentUser != null){
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, MainActivity::class.java))
             finish()
             return
         }

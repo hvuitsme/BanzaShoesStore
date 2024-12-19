@@ -1,15 +1,263 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragment.HomeFragment">
+    android:layout_height="match_parent">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!--    <com.airbnb.lottie.LottieAnimationView-->
+    <!--        android:id="@+id/loading"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:lottie_rawRes="@raw/loading"-->
+    <!--        app:lottie_autoPlay="true"-->
+    <!--        app:lottie_loop="true"-->
+    <!--        android:visibility="visible"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"/>-->
+
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/size_x4"
+        android:src="@drawable/bars_solid"
+        android:padding="7dp"
+        android:background="@drawable/bg_btn_home"
+        app:layout_constraintTop_toTopOf="@id/tv_brand"
+        app:layout_constraintBottom_toBottomOf="@id/tv_brand"
+        app:layout_constraintStart_toStartOf="parent"/>
+
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textSize="@dimen/text_size_x5" />
+        android:id="@+id/tv_brand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_x6"
+        android:fontFamily="@font/lexendbold"
+        android:text="@string/brand"
+        android:textSize="@dimen/text_size_x4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_x4"
+        android:src="@drawable/cart_1_svgrepo_com"
+        android:padding="5dp"
+        android:background="@drawable/bg_btn_home"
+        app:layout_constraintTop_toTopOf="@id/tv_brand"
+        app:layout_constraintBottom_toBottomOf="@id/tv_brand"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <EditText
+        android:id="@+id/edt_search"
+        android:layout_width="match_parent"
+        android:layout_height="33dp"
+        android:layout_marginStart="@dimen/size_x4"
+        android:layout_marginEnd="@dimen/size_x4"
+        android:layout_marginTop="@dimen/size_x6"
+        android:background="@drawable/bg_edtext"
+        android:hint="@string/search_itms"
+        android:paddingLeft="@dimen/size_x3"
+        android:fontFamily="@font/bacasimeantique"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_brand"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/size_x1"
+        android:src="@drawable/search"
+        android:padding="5dp"
+        app:layout_constraintTop_toTopOf="@id/edt_search"
+        app:layout_constraintBottom_toBottomOf="@id/edt_search"
+        app:layout_constraintEnd_toEndOf="@id/edt_search"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/slide"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_x4"
+        android:layout_marginStart="@dimen/size_x4"
+        android:layout_marginEnd="@dimen/size_x4"
+        app:layout_constraintTop_toBottomOf="@id/edt_search">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/pagerView"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/size_x14"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/pagerView"
+            app:layout_constraintEnd_toEndOf="@id/pagerView"
+            app:layout_constraintTop_toTopOf="@id/pagerView"
+            app:layout_constraintBottom_toBottomOf="@id/pagerView"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/size_x4"
+        android:layout_marginStart="@dimen/size_x4"
+        android:layout_marginEnd="@dimen/size_x4"
+        app:layout_constraintTop_toBottomOf="@id/slide"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/viewBrand"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/progressBarBrand"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@+id/viewBrand"
+            app:layout_constraintEnd_toEndOf="@+id/viewBrand"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/viewBrand" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!--    <HorizontalScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="60dp"-->
+    <!--        android:scrollbars="none"-->
+    <!--        android:layout_marginTop="@dimen/size_x4"-->
+    <!--        android:layout_marginStart="@dimen/size_x4"-->
+    <!--        android:layout_marginEnd="@dimen/size_x4"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@id/slide">-->
+
+    <!--        <androidx.constraintlayout.widget.ConstraintLayout-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="match_parent">-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/iv_louisvuitton"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:background="@drawable/bg_btn"-->
+    <!--                android:contentDescription="louisvuitton logo"-->
+    <!--                android:padding="10dp"-->
+    <!--                android:src="@drawable/louis_vuitton_logo"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintStart_toStartOf="parent"-->
+    <!--                app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/iv_nike"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:background="@drawable/bg_btn"-->
+    <!--                android:contentDescription="nike logo"-->
+    <!--                android:padding="10dp"-->
+    <!--                android:src="@drawable/nike_logo"-->
+    <!--                android:layout_marginStart="@dimen/size_x4"-->
+    <!--                app:layout_constraintStart_toEndOf="@id/iv_louisvuitton"-->
+    <!--                app:layout_constraintTop_toTopOf="parent"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/iv_adidas"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:contentDescription="adidas logo"-->
+    <!--                android:padding="10dp"-->
+    <!--                android:background="@drawable/bg_btn"-->
+    <!--                android:layout_marginStart="@dimen/size_x4"-->
+    <!--                app:layout_constraintStart_toEndOf="@id/iv_nike"-->
+    <!--                android:src="@drawable/adidas_logo"-->
+    <!--                app:layout_constraintTop_toTopOf="parent"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/iv_balenciaga"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:contentDescription="balenciaga logo"-->
+    <!--                android:padding="10dp"-->
+    <!--                android:background="@drawable/bg_btn"-->
+    <!--                android:layout_marginStart="@dimen/size_x4"-->
+    <!--                app:layout_constraintStart_toEndOf="@id/iv_adidas"-->
+    <!--                android:src="@drawable/balenciaga"-->
+    <!--                app:layout_constraintTop_toTopOf="parent"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/iv_converse"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:layout_marginStart="@dimen/size_x4"-->
+    <!--                android:background="@drawable/bg_btn"-->
+    <!--                android:contentDescription="converse logo"-->
+    <!--                android:padding="10dp"-->
+    <!--                android:src="@drawable/converse_logo"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--                app:layout_constraintStart_toEndOf="@id/iv_balenciaga"-->
+    <!--                app:layout_constraintTop_toTopOf="parent"-->
+    <!--                app:layout_constraintVertical_bias="0.0" />-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/iv_puma"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:contentDescription="puma logo"-->
+    <!--                android:padding="10dp"-->
+    <!--                android:background="@drawable/bg_btn"-->
+    <!--                android:layout_marginStart="@dimen/size_x4"-->
+    <!--                app:layout_constraintStart_toEndOf="@id/iv_converse"-->
+    <!--                android:src="@drawable/puma_logo"-->
+    <!--                app:layout_constraintTop_toTopOf="parent"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/iv_vans"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:contentDescription="vans logo"-->
+    <!--                android:padding="10dp"-->
+    <!--                android:background="@drawable/bg_btn"-->
+    <!--                android:layout_marginStart="@dimen/size_x4"-->
+    <!--                android:src="@drawable/vans_logo"-->
+    <!--                app:layout_constraintStart_toEndOf="@id/iv_puma"-->
+    <!--                app:layout_constraintTop_toTopOf="parent"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+    <!--            <ImageView-->
+    <!--                android:id="@+id/iv_golden_goose"-->
+    <!--                android:layout_width="wrap_content"-->
+    <!--                android:layout_height="60dp"-->
+    <!--                android:contentDescription="golden_goose logo"-->
+    <!--                android:padding="10dp"-->
+    <!--                android:background="@drawable/bg_btn"-->
+    <!--                android:layout_marginStart="@dimen/size_x4"-->
+    <!--                android:src="@drawable/golden_goose_logo"-->
+    <!--                app:layout_constraintStart_toEndOf="@id/iv_vans"-->
+    <!--                app:layout_constraintTop_toTopOf="parent"-->
+    <!--                app:layout_constraintBottom_toBottomOf="parent"/>-->
+
+    <!--        </androidx.constraintlayout.widget.ConstraintLayout>-->
+    <!--    </HorizontalScrollView>-->
+
+</androidx.constraintlayout.widget.ConstraintLayout>

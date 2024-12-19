@@ -109,7 +109,7 @@ class SignInActivity : AppCompatActivity() {
                 if (task.isSuccessful){
                     val user = auth.currentUser
                     Toast.makeText(this, "Sign in as ${user?.displayName}", Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this, HomeActivity::class.java))
+                    startActivity(Intent(this, MainActivity::class.java))
                     finish()
                 }else{
                     Toast.makeText(this, "Authentication failed", Toast.LENGTH_SHORT).show()
@@ -132,7 +132,7 @@ class SignInActivity : AppCompatActivity() {
 //    }
 
     private fun navigateToHome(){
-        startActivity(Intent(this, HomeActivity::class.java))
+        startActivity(Intent(this, MainActivity::class.java))
         finish()
     }
 }

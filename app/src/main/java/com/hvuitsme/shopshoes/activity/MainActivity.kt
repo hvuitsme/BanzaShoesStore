@@ -13,7 +13,6 @@ import com.hvuitsme.shopshoes.adapter.AdapterViewPage
 import com.hvuitsme.shopshoes.fragment.FavoriteFragment
 import com.hvuitsme.shopshoes.fragment.HomeFragment
 import com.hvuitsme.shopshoes.fragment.UserFragment
-import io.appwrite.models.User
 
 class MainActivity : AppCompatActivity() {
     private lateinit var pagerMain: ViewPager2
@@ -22,7 +21,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
 
         bottNav = findViewById(R.id.bottNav)
@@ -33,6 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         val adapterViewPage = AdapterViewPage(this, fragmentArrayList)
 
+        pagerMain.isUserInputEnabled = false
         pagerMain.adapter = adapterViewPage
         pagerMain.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
