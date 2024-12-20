@@ -10,14 +10,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewOutlineProvider
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import com.hvuitsme.shopshoes.R
 import com.hvuitsme.shopshoes.adapter.BrandAdapter
+import com.hvuitsme.shopshoes.adapter.RecommendAdapter
 import com.hvuitsme.shopshoes.adapter.SlideAdapter
 import com.hvuitsme.shopshoes.databinding.FragmentHomeBinding
+import com.hvuitsme.shopshoes.model.ProductModel
 import com.hvuitsme.shopshoes.model.SlideModel
 import com.hvuitsme.shopshoes.viewmodel.MainViewModel
 import kotlinx.coroutines.Runnable
@@ -53,6 +56,7 @@ class HomeFragment : Fragment() {
 
         intitBanner()
         initBrand()
+        initRecommend()
         startAutoScroll()
         stopAutoScroll()
     }
@@ -97,6 +101,16 @@ class HomeFragment : Fragment() {
             binding.progressBarBrand.visibility = View.GONE
         })
         viewModel.loadBrands()
+    }
+
+    private fun initRecommend() {
+        binding.progressBarRecommend.visibility = View.VISIBLE
+        viewModel.recommend.observe(viewLifecycleOwner, Observer {
+            binding.viewProduct.layoutManager = GridLayoutManager(requireContext(), 2)
+            binding.viewProduct.adapter = RecommendAdapter(it)
+            binding.progressBarRecommend.visibility = View.GONE
+        })
+        viewModel.loadRecommend()
     }
 
     private fun startAutoScroll() {

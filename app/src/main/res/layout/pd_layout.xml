@@ -5,16 +5,18 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_margin="@dimen/size_x2"
+    android:layout_marginLeft="@dimen/size_x1"
+    android:layout_marginRight="@dimen/size_x1"
     tools:ignore="HardcodedText, ContentDescription">
 
     <View
         android:id="@+id/pd_view"
         android:layout_width="180dp"
-        android:layout_height="260dp"
+        android:layout_height="290dp"
         android:background="@drawable/pd_bg"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
         android:id="@+id/iv_like"
@@ -22,21 +24,21 @@
         android:layout_height="25dp"
         android:src="@drawable/heart"
         android:layout_marginTop="@dimen/size_x2"
-        android:layout_marginEnd="@dimen/size_x1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/main_pdview"/>
+        android:layout_marginEnd="@dimen/size_x2"
+        app:layout_constraintTop_toTopOf="@id/pd_view"
+        app:layout_constraintEnd_toEndOf="@id/pd_view"/>
 
     <ImageView
         android:id="@+id/iv_product"
-        android:layout_width="170dp"
+        android:layout_width="160dp"
         android:layout_height="160dp"
+        android:layout_marginTop="4dp"
         android:contentDescription="TODO"
         android:scaleType="centerInside"
         android:src="@drawable/nikeshoes"
-        android:layout_marginTop="@dimen/size_x1"
-        app:layout_constraintTop_toBottomOf="@id/iv_like"
+        app:layout_constraintEnd_toEndOf="@id/main_pdview"
         app:layout_constraintStart_toStartOf="@id/main_pdview"
-        app:layout_constraintEnd_toEndOf="@id/main_pdview"/>
+        app:layout_constraintTop_toBottomOf="@id/iv_like" />
 
     <TextView
         android:id="@+id/pd_title"
@@ -51,6 +53,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_product"/>
 
+    <ImageView
+        android:id="@+id/star_rating"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/star"
+        android:layout_marginStart="@dimen/size_x1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pd_title"/>
+
+    <TextView
+        android:id="@+id/rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="4.6"
+        android:layout_marginStart="@dimen/size_x1"
+        app:layout_constraintTop_toTopOf="@id/star_rating"
+        app:layout_constraintStart_toEndOf="@id/star_rating"
+        app:layout_constraintBottom_toBottomOf="@id/star_rating"/>
+
     <TextView
         android:id="@+id/pd_price"
         android:layout_width="match_parent"
@@ -58,8 +79,10 @@
         android:text="300000000 VNĐ"
         android:textSize="@dimen/text_size_x4"
         android:layout_marginStart="@dimen/size_x1"
+        android:layout_marginBottom="@dimen/size_x2"
         app:layout_constraintStart_toStartOf="@id/pd_view"
-        app:layout_constraintTop_toBottomOf="@id/pd_title"/>
+        app:layout_constraintTop_toBottomOf="@id/star_rating"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <ImageView
         android:layout_width="30dp"
