@@ -61,4 +61,5 @@ dependencies {
     implementation("io.appwrite:sdk-for-android:6.0.0")
     implementation("com.google.code.gson:gson:2.11.0")
     implementation("com.tbuonomo:dotsindicator:5.1.0")
+    implementation("de.hdodenhof:circleimageview:3.1.0")
 }
